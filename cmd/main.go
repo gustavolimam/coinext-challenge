@@ -5,6 +5,7 @@ import (
 	"os"
 
 	"github.com/gustavolimam/coinext-challenge/internal/environment"
+	"github.com/gustavolimam/coinext-challenge/internal/handler"
 	"github.com/joho/godotenv"
 	"github.com/labstack/echo/v4"
 	"github.com/rs/zerolog"
@@ -28,9 +29,11 @@ func loadServer() *echo.Echo {
 	e := echo.New()
 	e.HideBanner = true
 
-	e.POST("/user", nil)
-	e.PUT("/user/:id/item", nil)
-	e.POST("/user/:id/trade", nil)
+	handler := handler.New()
+
+	e.POST("/user", handler.CreateUser)
+	e.PUT("/user/:id/item", handler.AddOrRemoveItem)
+	e.POST("/user/:id/trade", handler.Trade)
 
 	return e
 }
