@@ -1,8 +1,6 @@
 package handler
 
 import (
-	"net/http"
-
 	"github.com/gustavolimam/coinext-challenge/internal/services"
 	"github.com/labstack/echo/v4"
 )
@@ -22,13 +20,15 @@ func New() HandlerI {
 }
 
 func (h *handler) CreateUser(c echo.Context) error {
-	return c.JSON(http.StatusOK, "OK")
+
+	return h.UserService.CreateUser()
 }
 
 func (h *handler) AddOrRemoveItem(c echo.Context) error {
-	return c.JSON(http.StatusOK, "OK")
+
+	return h.UserService.AddOrRemoveItem()
 }
 
 func (h *handler) Trade(c echo.Context) error {
-	return c.JSON(http.StatusOK, "OK")
+	return h.UserService.Trade()
 }
